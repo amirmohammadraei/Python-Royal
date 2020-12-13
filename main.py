@@ -32,12 +32,48 @@ if __name__ == '__main__':
     print("Player" + str(turn) + " you should start.")
     menu(turn)
     choice = input()
+
     if choice == '1':
+        for i in player1.map:
+            print(i)
+        print("Buildings Present : ")
+        empty = 0
         for i in map1:
-            if i['building'] is None:
-                print('sa')
+            if i['building'] is not None:
+                print('[' + i['place'] + '] : ' + i['building'] + ' : ' + str(i['hp']) + ' / ' + str(i['mhp']))
+                empty += 1
             else:
-                print(i['place'])
+                continue
+        if empty == 0:
+            print("None.")
+
+        a = input("Enter your building expression :")
+        if a == 'back':
+            print("back to menu")
+        else:
+            try:
+                if len(a) == 1 and 0 <= int(a) < 9:
+                    print("Your chosen option is to repair building in place=" + a)
+                    for i in player1.buildings:
+                        if a == i['place']:
+                            if i['building'] is not None:
+                                if i['mhp'] != i['hp']:
+                                    i['hp'] = i['mhp']
+                                    print(i['hp'])
+                                else:
+                                    print("This building is not damaged, so no need to repair.")
+                            else:
+                                print("This place is empty so you can't repair anything.")
+                elif len(a) == 3 and a[1] == ' ' and a[0] in ['C', 'T', 'S', 'B'] \
+                        and int(a[2]) in [0, 1, 2, 3, 4, 5, 6, 7, 8]:
+                    if int(a[2]) == 4:
+                        print("You cant build in main building")
+                    else:
+                        print('We check that can we build your favorite building :)')
+                else:
+                    print("Enter valid input(s).")
+            except ValueError:
+                print("Enter valid input(s).")
     elif choice == '2':
         print("2")
     elif choice == '3':

@@ -7,55 +7,55 @@ class Player:
     troops = []
     buildings = [
         {
-            'place': 0,
+            'place': '0',
             'building': None,
             'hp': None,
             'mhp': None
         },
         {
-            'place': 1,
+            'place': '1',
             'building': None,
             'hp': None,
             'mhp': None
         },
         {
-            'place': 2,
+            'place': '2',
             'building': None,
             'hp': None,
             'mhp': None
         },
         {
-            'place': 3,
+            'place': '3',
             'building': None,
             'hp': None,
             'mhp': None
         },
         {
-            'place': 4,
+            'place': '4',
             'building': 'C',
             'hp': 3000,
             'mhp': 3000
         },
         {
-            'place': 5,
+            'place': '5',
             'building': None,
             'hp': None,
             'mhp': None
         },
         {
-            'place': 6,
+            'place': '6',
             'building': None,
             'hp': None,
             'mhp': None
         },
         {
-            'place': 7,
+            'place': '7',
             'building': None,
             'hp': None,
             'mhp': None
         },
         {
-            'place': 8,
+            'place': '8',
             'building': None,
             'hp': None,
             'mhp': None
