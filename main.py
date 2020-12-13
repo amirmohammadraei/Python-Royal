@@ -19,11 +19,21 @@ def change_player(turn):
         return 1
 
 
+def check_enough_money(building_name, player_money):
+    for build in buildings.buildings:
+        if build['code'] == building_name:
+            if player_money - build['price'] >= 0:
+                return build['price']
+            else:
+                return False
+
+
 if __name__ == '__main__':
     print("Hi everyone!")
+    buildings = Building()
     nickname1 = input("Player1 please enter your nickname: ")
     nickname2 = input("Player2 please enter your nickname: ")
-    player1 = Player(nickname1, 5000000)
+    player1 = Player(nickname1, 300)
     player2 = Player(nickname2, 5000000)
     map1 = Player.buildings
     map2 = Player.buildings
@@ -58,8 +68,13 @@ if __name__ == '__main__':
                         if a == i['place']:
                             if i['building'] is not None:
                                 if i['mhp'] != i['hp']:
-                                    i['hp'] = i['mhp']
-                                    print(i['hp'])
+                                    res = check_enough_money(i['building'], player1.money)
+                                    if res is False:
+                                        print("You don't have enough money to repair your building.")
+                                    else:
+                                        player1.money -= res
+                                        print("Repair completed successfully.")
+                                        print(player1.money)
                                 else:
                                     print("This building is not damaged, so no need to repair.")
                             else:
