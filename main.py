@@ -25,20 +25,19 @@ if __name__ == '__main__':
     nickname2 = input("Player2 please enter your nickname: ")
     player1 = Player(nickname1, 5000000)
     player2 = Player(nickname2, 5000000)
+    map1 = Player.buildings
+    map2 = Player.buildings
     turn = randint(1, 2)
     start = 0
     print("Player" + str(turn) + " you should start.")
     menu(turn)
     choice = input()
     if choice == '1':
-        for i in player1.map:
-            print(i)
-        for i in player1.map:
-            for j in i:
-                if len(j) == 3:
-                    print(j[2])
-                else:
-                    print(j)
+        for i in map1:
+            if i['building'] is None:
+                print('sa')
+            else:
+                print(i['place'])
     elif choice == '2':
         print("2")
     elif choice == '3':
