@@ -145,6 +145,8 @@ if __name__ == '__main__':
                     retnon += 1
                     print('\n' + '\t' + tropp_name(i['code']) + " : " + str(i['count']), end='')
             print('None.') if retnon == 0 else print()
+            opt2 = input("Enter your troops expression: ")
+
         elif choice == '3':
             print('3')
         elif choice == '4':
