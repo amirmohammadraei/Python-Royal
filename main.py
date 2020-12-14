@@ -23,7 +23,7 @@ def check_enough_money(building_name, player_money):
     for build in buildings.buildings:
         if build['code'] == building_name:
             if player_money - build['price'] >= 0:
-                return build['price']
+                return build['price'], build['HP'], build['Damage']
             else:
                 return False
 
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     buildings = Building()
     nickname1 = input("Player1 please enter your nickname: ")
     nickname2 = input("Player2 please enter your nickname: ")
-    player1 = Player(nickname1, 100000000000)
+    player1 = Player(nickname1, 2000)
     player2 = Player(nickname2, 5000000)
     map1 = Player.buildings
     map2 = Player.buildings
@@ -72,7 +72,7 @@ if __name__ == '__main__':
                                     if res is False:
                                         print("You don't have enough money to repair your building.")
                                     else:
-                                        player1.money -= res
+                                        player1.money -= int(res[0])
                                         print("Repair completed successfully.")
                                         print(player1.money)
                                 else:
@@ -83,40 +83,42 @@ if __name__ == '__main__':
                         and int(a[2]) in [0, 1, 2, 3, 4, 5, 6, 7, 8]:
                     if int(a[2]) == 4:
                         print("You cant build in main building.")
+                    elif a[0] == 'C' and int(a[2]) != 4:
+                        print("Main building can not be built in any place except place 4.")
                     else:
                         for i in map1:
                             if i['place'] == a[2]:
-                                if i['building'] is None:
-                                    for j in buildings.buildings:
-                                        res = check_enough_money(a[0], player1.money)
-                                        if res is False:
-                                            print("You don't have enough money build your building hear.")
+                                if i['building'] is None or i['hp'] == 0:
+                                    res = check_enough_money(a[0], player1.money)
+                                    if res is False:
+                                        print("You don't have enough money build your building hear.")
+                                    else:
+                                        player1.money -= res[0]
+                                        i['building'] = a[0]
+                                        i['hp'] = res[1]
+                                        i['mhp'] = res[1]
+                                        i['damage'] = res[2]
+                                        pos = int(a[2])
+                                        length = len(player1.map[int(pos / 2)][int(pos % 3)])
+                                        if length == 1:
+                                            player1.map[int(pos / 2)][int(pos % 3)] += '-' + a[0]
                                         else:
-                                            if j['code'] == a[0]:
-                                                i['mhp'] = j['HP']
-                                                i['hp'] = j['HP']
-                                            i['building'] = a[0]
-                                            z = int(a[2])
-                                            var = player1.map[int(z / 3)][(z % 3)]
-                                            if len(var) == 1:
-                                                player1.map[int(z / 3)][(z % 3)] += '-'+str(a[0])
-                                            else:
-                                                print("check she")
-                                            player1.money -= res
+                                            player1.map[int(pos / 2)][int(pos % 3)] = a[2] + '-' + a[0]
+                                        print("Your request has been successfully done.")
                                 else:
                                     print("This place is full, you can't add building hear.")
-                    for i in player1.map:
-                        print(i)
+                        for i in player1.map:
+                            print(i)
+                        print(player1.money)
+                    for m in map1:
+                        if m['building'] is not None:
+                            print('[' + m['place'] + '] : ' + m['building'] + ' : ' + str(
+                                m['hp']) + ' / ' + str(m['mhp']))
+                            empty += 1
                 else:
                     print("Enter valid input(s).")
             except ValueError:
                 print("Enter valid input(s).")
-            for i in map1:
-                if i['building'] is not None:
-                    print('[' + i['place'] + '] : ' + i['building'] + ' : ' + str(i['hp']) + ' / ' + str(i['mhp']))
-                    empty += 1
-                else:
-                    continue
 
     elif choice == '2':
         print("2")
