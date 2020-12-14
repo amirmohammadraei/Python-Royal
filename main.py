@@ -99,11 +99,11 @@ if __name__ == '__main__':
                                         i['mhp'] = res[1]
                                         i['damage'] = res[2]
                                         pos = int(a[2])
-                                        length = len(player1.map[int(pos / 2)][int(pos % 3)])
+                                        length = len(player1.map[int(pos / 3)][int(pos % 3)])
                                         if length == 1:
-                                            player1.map[int(pos / 2)][int(pos % 3)] += '-' + a[0]
+                                            player1.map[int(pos / 3)][int(pos % 3)] += '-' + a[0]
                                         else:
-                                            player1.map[int(pos / 2)][int(pos % 3)] = a[2] + '-' + a[0]
+                                            player1.map[int(pos / 3)][int(pos % 3)] = a[2] + '-' + a[0]
                                         print("Your request has been successfully done.")
                                 else:
                                     print("This place is full, you can't add building hear.")
