@@ -1,5 +1,6 @@
 from Player.player import Player
 from Building.building import Building
+from Troop.troop import Troop
 from random import *
 
 
@@ -28,15 +29,30 @@ def check_enough_money(building_name, player_money):
                 return False
 
 
+def building_name(code):
+    for cc in buildings.buildings:
+        if code == cc['code']:
+            return cc['name']
+
+
+def tropp_name(code):
+    for tr in troops.troops:
+        if code == tr['code']:
+            return tr['name']
+
+
 if __name__ == '__main__':
     print("Hi everyone!")
     buildings = Building()
+    troops = Troop()
     nickname1 = input("Player1 please enter your nickname: ")
     nickname2 = input("Player2 please enter your nickname: ")
     player1 = Player(nickname1, 500)
     player2 = Player(nickname2, 5000000)
-    map1 = Player.buildings
-    map2 = Player.buildings
+    map1 = player1.buildings
+    map2 = player2.buildings
+    troops1 = player1.troops
+    troops2 = player2.troops
     turn = randint(1, 2)
     start = 0
     print("Player" + str(turn) + " you should start.")
@@ -50,7 +66,8 @@ if __name__ == '__main__':
             empty = 0
             for i in map1:
                 if i['building'] is not None:
-                    print('[' + i['place'] + '] : ' + i['building'] + ' : ' + str(i['hp']) + ' / ' + str(i['mhp']))
+                    print('[' + i['place'] + '] : ' + building_name(i['building']) + ' : ' +
+                          str(i['hp']) + ' / ' + str(i['mhp']))
                     empty += 1
                 else:
                     continue
@@ -109,8 +126,8 @@ if __name__ == '__main__':
                                             # print(player1.money)
                                             for m in map1:
                                                 if m['building'] is not None:
-                                                    print('[' + m['place'] + '] : ' + m['building'] + ' : ' + str(
-                                                        m['hp']) + ' / ' + str(m['mhp']))
+                                                    print('[' + m['place'] + '] : ' + building_name(m['building']) +
+                                                          ' : ' + str(m['hp']) + ' / ' + str(m['mhp']))
                                                     empty += 1
                                             print("Your request has been successfully done.")
                                     else:
@@ -121,7 +138,13 @@ if __name__ == '__main__':
                     print("Enter valid input(s).")
 
         elif choice == '2':
-            print("2")
+            retnon = 0
+            print("Troops available in your army: ", end='')
+            for i in troops1:
+                if i['count'] != 0:
+                    retnon += 1
+                    print('\n' + '\t' + tropp_name(i['code']) + " : " + str(i['count']), end='')
+            print('None.') if retnon == 0 else print()
         elif choice == '3':
             print('3')
         elif choice == '4':
