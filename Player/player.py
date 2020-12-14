@@ -1,6 +1,6 @@
 class Player:
     map = [
-        ['0-B', '1', '2'],
+        ['0', '1', '2'],
         ['3', '4-C', '5'],
         ['6', '7', '8'],
     ]
@@ -8,9 +8,9 @@ class Player:
     buildings = [
         {
             'place': '0',
-            'building': 'B',
-            'hp': 0,
-            'mhp': 220,
+            'building': None,
+            'hp': None,
+            'mhp': None,
             'damage': None
         },
         {
