@@ -4,7 +4,26 @@ class Player:
         ['3', '4-C', '5'],
         ['6', '7', '8'],
     ]
-    troops = []
+    troops = [
+        {
+            'code': 'S',
+            'count': 1,
+            'HP': 10,
+            'Damage': 10,
+        },
+        {
+            'code': 'T',
+            'count': 0,
+            'HP': 100,
+            'Damage': 100,
+        },
+        {
+            'code': 'F',
+            'count': 0,
+            'HP': 50,
+            'Damage': 250,
+        }
+    ]
     buildings = [
         {
             'place': '0',
