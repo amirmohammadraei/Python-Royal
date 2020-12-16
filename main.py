@@ -29,6 +29,15 @@ def check_enough_money(buildings_name, player_money):
                 return False
 
 
+def print_player_money(player_money):
+    if player_money == 0:
+        print("You have no more coin.")
+    elif player_money == 1:
+        print("You have " + str(player_money) + ' coin.')
+    else:
+        print("You have " + str(player_money) + ' coins.')
+
+
 def building_name(code):
     for cc in buildings.buildings:
         if code == cc['code']:
@@ -92,7 +101,7 @@ if __name__ == '__main__':
                                         else:
                                             player1.money -= int(res[0])
                                             print("Repair completed successfully.")
-                                            print(player1.money)
+                                            print_player_money(player1.money)
                                     else:
                                         print("This building is not damaged, so no need to repair.")
                                 else:
@@ -131,6 +140,7 @@ if __name__ == '__main__':
                                                           ' : ' + str(m['hp']) + ' / ' + str(m['mhp']))
                                                     empty += 1
                                             print("Your request has been successfully done.")
+                                            print_player_money(player1.money)
                                     else:
                                         print("This place is full, you can't add building hear.")
                     else:
@@ -156,8 +166,9 @@ if __name__ == '__main__':
                             for w in player1.troops:
                                 if w['code'] == i['code']:
                                     w['count'] += int(opt2[2])
-                            print("Troops added to your army.")
                             player1.money -= fee
+                            print("Troops added to your army.")
+                            print_player_money(player1.money)
                         else:
                             print("You don't have enough money.")
             else:
