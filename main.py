@@ -97,7 +97,8 @@ if __name__ == '__main__':
                                     if i['mhp'] != i['hp']:
                                         res = check_enough_money(i['building'], player1.money)
                                         if res is False:
-                                            print("You don't have enough money to repair your building.")
+                                            print("You don't have enough money to repair your building.", end=' ')
+                                            print_player_money(player1.money)
                                         else:
                                             player1.money -= int(res[0])
                                             print("Repair completed successfully.")
@@ -118,7 +119,8 @@ if __name__ == '__main__':
                                     if i['building'] is None or i['hp'] == 0:
                                         res = check_enough_money(a[0], player1.money)
                                         if res is False:
-                                            print("You don't have enough money build your building hear.")
+                                            print("You don't have enough money build your building hear.", end=' ')
+                                            print_player_money(player1.money)
                                         else:
                                             player1.money -= res[0]
                                             i['building'] = a[0]
@@ -157,11 +159,32 @@ if __name__ == '__main__':
                     print('\n' + '\t' + tropp_name(i['code']) + " : " + str(i['count']), end='')
             print('None.') if retnon == 0 else print()
             opt2 = input("Enter your troops expression: ")
-            if len(opt2) == 3 and opt2[0] in ['S', 'T', 'F'] and int(opt2[2]) > 0 and opt2[1] == ' ':
+            if opt2[0] in ['S', 'T', 'F'] and opt2[1] == ' ' and int(opt2[2]) > 0:
+                count = 2
+                num = ''
+                while True:
+                    try:
+                        num += str(int(opt2[count]))
+                        count += 1
+                    except IndexError:
+                        count = 2
+                        break
+                    except ValueError:
+                        print("Enter valid inputs.")
+                        break_point = True
+                        count = 2
+                        break
+                try:
+                    if break_point is True:
+                        continue
+                except NameError:
+                    pass
+
+                tedad = int(num)
                 for i in troops.troops:
                     if i['code'] == opt2[0]:
                         price = i['price']
-                        fee = int(price) * int(opt2[2])
+                        fee = int(price) * tedad
                         if player1.money - fee >= 0:
                             for w in player1.troops:
                                 if w['code'] == i['code']:
@@ -170,7 +193,8 @@ if __name__ == '__main__':
                             print("Troops added to your army.")
                             print_player_money(player1.money)
                         else:
-                            print("You don't have enough money.")
+                            print("You don't have enough money.", end=' ')
+                            print_player_money(player1.money)
             else:
                 print("Enter valid inputs.")
 
