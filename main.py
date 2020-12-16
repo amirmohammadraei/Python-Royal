@@ -20,9 +20,9 @@ def change_player(turn):
         return 1
 
 
-def check_enough_money(building_name, player_money):
+def check_enough_money(buildings_name, player_money):
     for build in buildings.buildings:
-        if build['code'] == building_name:
+        if build['code'] == buildings_name:
             if player_money - build['price'] >= 0:
                 return build['price'], build['HP'], build['Damage']
             else:
@@ -77,6 +77,7 @@ if __name__ == '__main__':
             a = input("Enter your building expression :")
             if a == 'back':
                 print("back to menu")
+                continue
             else:
                 try:
                     if len(a) == 1 and 0 <= int(a) < 9:
@@ -146,6 +147,21 @@ if __name__ == '__main__':
                     print('\n' + '\t' + tropp_name(i['code']) + " : " + str(i['count']), end='')
             print('None.') if retnon == 0 else print()
             opt2 = input("Enter your troops expression: ")
+            if len(opt2) == 3 and opt2[0] in ['S', 'T', 'F'] and int(opt2[2]) > 0 and opt2[1] == ' ':
+                for i in troops.troops:
+                    if i['code'] == opt2[0]:
+                        price = i['price']
+                        fee = int(price) * int(opt2[2])
+                        if player1.money - fee >= 0:
+                            for w in player1.troops:
+                                if w['code'] == i['code']:
+                                    w['count'] += int(opt2[2])
+                            print("Troops added to your army.")
+                            player1.money -= fee
+                        else:
+                            print("You don't have enough money.")
+            else:
+                print("Enter valid inputs.")
 
         elif choice == '3':
             print('3')
