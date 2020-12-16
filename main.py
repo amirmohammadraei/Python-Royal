@@ -1,6 +1,6 @@
-from Player.player import Player
-from Building.building import Building
-from Troop.troop import Troop
+from player import Player
+from building import Building
+from troop import Troop
 from random import *
 
 
@@ -56,7 +56,7 @@ if __name__ == '__main__':
     troops = Troop()
     nickname1 = input("Player1 please enter your nickname: ")
     nickname2 = input("Player2 please enter your nickname: ")
-    player1 = Player(nickname1, 2000)
+    player1 = Player(nickname1, 500)
     player2 = Player(nickname2, 5000000)
     map1 = player1.buildings
     map2 = player2.buildings
@@ -158,12 +158,8 @@ if __name__ == '__main__':
                     retnon += 1
                     print('\n' + '\t' + tropp_name(i['code']) + " : " + str(i['count']), end='')
             print('None.') if retnon == 0 else print()
-
             opt2 = input("Enter your troops expression: ")
-            if opt2.lower() == 'back':
-                print("back to menu")
-                continue
-            elif opt2[0] in ['S', 'T', 'F'] and opt2[1] == ' ' and int(opt2[2]) > 0:
+            if opt2[0] in ['S', 'T', 'F'] and opt2[1] == ' ' and int(opt2[2]) > 0:
                 count = 2
                 num = ''
                 while True:
@@ -203,32 +199,7 @@ if __name__ == '__main__':
                 print("Enter valid inputs.")
 
         elif choice == '3':
-            print("\n\n************** MAP + BUILDINGS **************")
-            for i in player1.map:
-                print(i)
-            print()
-            print("Buildings Present : ")
-            empty = 0
-            for i in map1:
-                if i['building'] is not None:
-                    print('[' + i['place'] + '] : ' + building_name(i['building']) + ' : ' +
-                          str(i['hp']) + ' / ' + str(i['mhp']))
-                    empty += 1
-                else:
-                    continue
-            if empty == 0:
-                print("None.")
-            print('\n\n')
-            print("************** TROOPS **************")
-            retnon = 0
-            print("Troops available in your army: ", end='')
-            for i in troops1:
-                if i['count'] != 0:
-                    retnon += 1
-                    print('\n' + '\t' + tropp_name(i['code']) + " : " + str(i['count']), end='')
-            print('None.') if retnon == 0 else print()
-            print('\n\n')
-
+            print('3')
         elif choice == '4':
             print("Done!")
             break

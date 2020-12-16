@@ -7,19 +7,19 @@ class Player:
     troops = [
         {
             'code': 'S',
-            'count': 0,
+            'count': 4,
             'HP': 10,
             'Damage': 10,
         },
         {
             'code': 'T',
-            'count': 0,
+            'count': 13,
             'HP': 100,
             'Damage': 100,
         },
         {
             'code': 'F',
-            'count': 0,
+            'count': 90,
             'HP': 50,
             'Damage': 250,
         }
