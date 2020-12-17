@@ -1,5 +1,5 @@
 # Python-Royal
-Something like clash royal but much easier and no GUI.
+Something like clash royal but much easier and no GUI(aber jetz 😀).
 
 in پروگرس
 
