@@ -4,7 +4,7 @@ from troop import Troop
 from random import *
 
 
-class Handler():
+class Handler:
     buildings = Building()
     troops = Troop()
 
@@ -20,7 +20,20 @@ class Handler():
             if code == cc['code']:
                 return cc['name']
 
-    def menu(self, player):
+    def tropp_name(self, code):
+        for tr in self.troops.troops:
+            if code == tr['code']:
+                return tr['name']
+
+    def print_player_money(self, player_money):
+        if player_money == 0:
+            print("You have no more coin.")
+        elif player_money == 1:
+            print("You have " + str(player_money) + ' coin.')
+        else:
+            print("You have " + str(player_money) + ' coins.')
+
+    def print_menu(self, player):
         print('player' + str(player) + ' menu: \n'
                                        '1.Buildings construction \n'
                                        '2.Units Training \n'
@@ -45,14 +58,15 @@ class Handler():
             print("You have " + str(player_money) + ' coins.')
 
     map = Player.buildings
-    troops = Player.troops
+    player_troops = Player.troops
     start = 0
 
     def menu(self):
-        print("Player" + str(self.turn) + " you should start.")
+#        turn = randint(1, 2)
+    #    print("Player" + str(turn) + " you should start.")
 
         while True:
-            self.menu()
+            self.print_menu(2)
             choice = input()
             if choice == '1':
                 for i in Player.map:
@@ -81,14 +95,14 @@ class Handler():
                                 if a == i['place']:
                                     if i['building'] is not None:
                                         if i['mhp'] != i['hp']:
-                                            res = self.check_enough_money(i['building'], Player.money)
+                                            res = self.check_enough_money(i['building'], self.Player.money)
                                             if res is False:
                                                 print("You don't have enough money to repair your building.", end=' ')
-                                                self.print_player_money(Player.money)
+                                                self.print_player_money(self.Player.money)
                                             else:
-                                                Player.money -= int(res[0])
+                                                self.Player.money -= int(res[0])
                                                 print("Repair completed successfully.")
-                                                self.print_player_money(Player.money)
+                                                self.print_player_money(self.Player.money)
                                         else:
                                             print("This building is not damaged, so no need to repair.")
                                     else:
@@ -103,12 +117,12 @@ class Handler():
                                 for i in self.map:
                                     if i['place'] == a[2]:
                                         if i['building'] is None or i['hp'] == 0:
-                                            res = self.check_enough_money(a[0], Player.money)
+                                            res = self.check_enough_money(a[0], self.Player.money)
                                             if res is False:
                                                 print("You don't have enough money build your building hear.", end=' ')
-                                                self.print_player_money(Player.money)
+                                                self.print_player_money(self.Player.money)
                                             else:
-                                                Player.money -= res[0]
+                                                self.Player.money -= res[0]
                                                 i['building'] = a[0]
                                                 i['hp'] = res[1]
                                                 i['mhp'] = res[1]
@@ -128,10 +142,70 @@ class Handler():
                                                               ' : ' + str(m['hp']) + ' / ' + str(m['mhp']))
                                                         empty += 1
                                                 print("Your request has been successfully done.")
-                                                self.print_player_money(Player.money)
+                                                self.print_player_money(self.Player.money)
                                         else:
                                             print("This place is full, you can't add building hear.")
                         else:
                             print("Enter valid input(s).")
                     except ValueError:
                         print("Enter valid input(s).")
+
+            elif choice == '2':
+                retnon = 0
+                print("Troops available in your army: ", end='')
+                for i in self.player_troops:
+                    if i['count'] != 0:
+                        retnon += 1
+                        print('\n' + '\t' + self.tropp_name(i['code']) + " : " + str(i['count']), end='')
+                print('None.') if retnon == 0 else print()
+                opt2 = input("Enter your troops expression: ")
+                if opt2[0] in ['S', 'T', 'F'] and opt2[1] == ' ' and int(opt2[2]) > 0:
+                    count = 2
+                    num = ''
+                    while True:
+                        try:
+                            num += str(int(opt2[count]))
+                            count += 1
+                        except IndexError:
+                            count = 2
+                            break
+                        except ValueError:
+                            print("Enter valid inputs.")
+                            break_point = True
+                            count = 2
+                            break
+                    try:
+                        if break_point is True:
+                            continue
+                    except NameError:
+                        pass
+
+                    tedad = int(num)
+                    for i in self.troops.troops:
+                        if i['code'] == opt2[0]:
+                            price = i['price']
+                            fee = int(price) * tedad
+                            if self.Player.money - fee >= 0:
+                                for w in self.Player.troops:
+                                    if w['code'] == i['code']:
+                                        w['count'] += int(opt2[2])
+                                self.Player.money -= fee
+                                print("Troops added to your army.")
+                                self.print_player_money(self.Player.money)
+                            else:
+                                print("You don't have enough money.", end=' ')
+                                self.print_player_money(self.Player.money)
+                else:
+                    print("Enter valid inputs.")
+
+            elif choice == '3':
+                print("************ MAP ************")
+                for i in self.map:
+                    if i['building'] is not None:
+                        print('[' + i['place'] + '] : ' + self.building_name(i['building']) + ' : ' +
+                              str(i['hp']) + ' / ' + str(i['mhp']))
+                        empty += 1
+                    else:
+                        continue
+                if empty == 0:
+                    print("None.")
