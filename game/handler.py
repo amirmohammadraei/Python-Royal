@@ -199,7 +199,11 @@ class Handler:
                     print("Enter valid inputs.")
 
             elif choice == '3':
-                print("************ MAP ************")
+                print("\n\n************ MAP ************")
+                for i in Player.map:
+                    print(i)
+                print()
+                empty = 0
                 for i in self.map:
                     if i['building'] is not None:
                         print('[' + i['place'] + '] : ' + self.building_name(i['building']) + ' : ' +
@@ -209,3 +213,17 @@ class Handler:
                         continue
                 if empty == 0:
                     print("None.")
+                print("\n\n************ ARMY ************")
+                retnon = 0
+                print("Troops available in your army: ", end='')
+                for i in self.player_troops:
+                    if i['count'] != 0:
+                        retnon += 1
+                        print('\n' + '\t' + self.tropp_name(i['code']) + " : " + str(i['count']), end='')
+                print('None.') if retnon == 0 else print()
+                print('\n')
+            elif choice == '4':
+                print("Done!")
+                break
+            else:
+                print("Please enter valid input.")
