@@ -11,10 +11,6 @@ class Handler:
     def __init__(self, player):
         self.Player = player
 
-    def salam(self):
-        self.Player.money = 127682348
-        print(self.Player.money)
-
     def building_name(self, code):
         for cc in self.buildings.buildings:
             if code == cc['code']:
@@ -61,12 +57,9 @@ class Handler:
     player_troops = Player.troops
     start = 0
 
-    def menu(self):
-#        turn = randint(1, 2)
-    #    print("Player" + str(turn) + " you should start.")
-
+    def menu(self, turn):
         while True:
-            self.print_menu(2)
+            self.print_menu(turn)
             choice = input()
             if choice == '1':
                 for i in Player.map:
@@ -159,6 +152,9 @@ class Handler:
                         print('\n' + '\t' + self.tropp_name(i['code']) + " : " + str(i['count']), end='')
                 print('None.') if retnon == 0 else print()
                 opt2 = input("Enter your troops expression: ")
+                if a == 'back':
+                    print("back to menu")
+                    continue
                 if opt2[0] in ['S', 'T', 'F'] and opt2[1] == ' ' and int(opt2[2]) > 0:
                     count = 2
                     num = ''

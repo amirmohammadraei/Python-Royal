@@ -59,4 +59,20 @@ if __name__ == '__main__':
     nickname2 = input("Player2 please enter your nickname: ")
     player1 = Player(nickname1, 500)
     player2 = Player(nickname2, 5000000)
-    var = Handler(player1).menu()
+    turn = randint(1, 2)
+    print("Player" + str(turn) + " you should start.")
+    if turn == 1:
+        var1 = Handler(player1).menu(1)
+        print('tamoom1')
+        var2 = Handler(player2).menu(2)
+        print('tammom 2')
+    elif turn == 2:
+        var2 = Handler(player2).menu(2)
+        print('tamoom2')
+        var1 = Handler(player1).menu(1)
+        print('tamom1')
+    else:
+        print("Something went wrong. Try again.")
+
+    print(player1.map)
+    print(player2.map)
