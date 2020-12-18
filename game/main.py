@@ -57,13 +57,10 @@ if __name__ == '__main__':
     troops = Troop()
     nickname1 = input("Player1 please enter your nickname: ")
     nickname2 = input("Player2 please enter your nickname: ")
-    player1 = Player(nickname1, 500)
+    player1 = Player(nickname1, 50000)
     player2 = Player(nickname2, 5000000)
 
-    player1.change_troops
-    print(player2.troops)
-
-    """turn = randint(1, 2)
+    turn = randint(1, 2)
     print("Player" + str(turn) + " you should start.")
     if turn == 1:
         var1 = Handler(player1).menu(1)
@@ -73,6 +70,3 @@ if __name__ == '__main__':
         var1 = Handler(player1).menu(1)
     else:
         print("Something went wrong. Try again.")
-
-    print()
-"""

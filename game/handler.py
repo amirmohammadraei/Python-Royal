@@ -53,20 +53,18 @@ class Handler:
         else:
             print("You have " + str(player_money) + ' coins.')
 
-    map = Player.buildings
-    player_troops = Player.troops
-    start = 0
-
     def menu(self, turn):
+        buildings = self.Player.buildings
+        player_troops = self.Player.troops
         while True:
             self.print_menu(turn)
             choice = input()
             if choice == '1':
-                for i in Player.map:
+                for i in self.Player.map:
                     print(i)
                 print("Buildings Present : ")
                 empty = 0
-                for i in self.map:
+                for i in buildings:
                     if i['building'] is not None:
                         print('[' + i['place'] + '] : ' + self.building_name(i['building']) + ' : ' +
                               str(i['hp']) + ' / ' + str(i['mhp']))
@@ -84,7 +82,7 @@ class Handler:
                     try:
                         if len(a) == 1 and 0 <= int(a) < 9:
                             print("Your chosen option is to repair building in place=" + a)
-                            for i in self.map:
+                            for i in buildings:
                                 if a == i['place']:
                                     if i['building'] is not None:
                                         if i['mhp'] != i['hp']:
@@ -107,7 +105,7 @@ class Handler:
                             elif a[0] == 'C' and int(a[2]) != 4:
                                 print("Main building can not be built in any place except place 4.")
                             else:
-                                for i in self.map:
+                                for i in buildings:
                                     if i['place'] == a[2]:
                                         if i['building'] is None or i['hp'] == 0:
                                             res = self.check_enough_money(a[0], self.Player.money)
@@ -121,17 +119,18 @@ class Handler:
                                                 i['mhp'] = res[1]
                                                 i['damage'] = res[2]
                                                 pos = int(a[2])
-                                                length = len(Player.map[int(pos / 3)][int(pos % 3)])
+                                                length = len(self.Player.map[int(pos / 3)][int(pos % 3)])
                                                 if length == 1:
-                                                    Player.map[int(pos / 3)][int(pos % 3)] += '-' + a[0]
+                                                    self.Player.map[int(pos / 3)][int(pos % 3)] += '-' + a[0]
                                                 else:
-                                                    Player.map[int(pos / 3)][int(pos % 3)] = a[2] + '-' + a[0]
-                                                for p in Player.map:
+                                                    self.Player.map[int(pos / 3)][int(pos % 3)] = a[2] + '-' + a[0]
+                                                for p in self.Player.map:
                                                     print(p)
                                                 # print(player1.money)
-                                                for m in self.map:
+                                                for m in buildings:
                                                     if m['building'] is not None:
-                                                        print('[' + m['place'] + '] : ' + self.building_name(m['building']) +
+                                                        print('[' + m['place'] + '] : ' +
+                                                              self.building_name(m['building']) +
                                                               ' : ' + str(m['hp']) + ' / ' + str(m['mhp']))
                                                         empty += 1
                                                 print("Your request has been successfully done.")
@@ -146,7 +145,7 @@ class Handler:
             elif choice == '2':
                 retnon = 0
                 print("Troops available in your army: ", end='')
-                for i in self.player_troops:
+                for i in player_troops:
                     if i['count'] != 0:
                         retnon += 1
                         print('\n' + '\t' + self.tropp_name(i['code']) + " : " + str(i['count']), end='')
@@ -155,7 +154,7 @@ class Handler:
                 if opt2 == 'back':
                     print("back to menu")
                     continue
-                elif opt2[0] in ['S', 'T', 'F'] and opt2[1] == ' ' and int(opt2[2]) > 0:
+                elif opt2[0] in ['S', 'T', 'F'] and opt2[1] == ' ':
                     count = 2
                     num = ''
                     while True:
@@ -175,16 +174,16 @@ class Handler:
                             continue
                     except NameError:
                         pass
-
                     tedad = int(num)
                     for i in self.troops.troops:
                         if i['code'] == opt2[0]:
                             price = i['price']
                             fee = int(price) * tedad
                             if self.Player.money - fee >= 0:
-                                for w in self.Player.troops:
+                                for w in player_troops:
                                     if w['code'] == i['code']:
-                                        w['count'] += int(opt2[2])
+                                        print(w['count'])
+                                        w['count'] += tedad
                                 self.Player.money -= fee
                                 print("Troops added to your army.")
                                 self.print_player_money(self.Player.money)
@@ -196,11 +195,11 @@ class Handler:
 
             elif choice == '3':
                 print("\n\n************ MAP ************")
-                for i in Player.map:
+                for i in self.Player.map:
                     print(i)
                 print()
                 empty = 0
-                for i in self.map:
+                for i in buildings:
                     if i['building'] is not None:
                         print('[' + i['place'] + '] : ' + self.building_name(i['building']) + ' : ' +
                               str(i['hp']) + ' / ' + str(i['mhp']))
@@ -212,12 +211,13 @@ class Handler:
                 print("\n\n************ ARMY ************")
                 retnon = 0
                 print("Troops available in your army: ", end='')
-                for i in self.player_troops:
+                for i in player_troops:
                     if i['count'] != 0:
                         retnon += 1
                         print('\n' + '\t' + self.tropp_name(i['code']) + " : " + str(i['count']), end='')
                 print('None.') if retnon == 0 else print()
                 print('\n')
+
             elif choice == '4':
                 print("Done!")
                 break
