@@ -152,10 +152,10 @@ class Handler:
                         print('\n' + '\t' + self.tropp_name(i['code']) + " : " + str(i['count']), end='')
                 print('None.') if retnon == 0 else print()
                 opt2 = input("Enter your troops expression: ")
-                if a == 'back':
+                if opt2 == 'back':
                     print("back to menu")
                     continue
-                if opt2[0] in ['S', 'T', 'F'] and opt2[1] == ' ' and int(opt2[2]) > 0:
+                elif opt2[0] in ['S', 'T', 'F'] and opt2[1] == ' ' and int(opt2[2]) > 0:
                     count = 2
                     num = ''
                     while True:

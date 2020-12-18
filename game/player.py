@@ -7,19 +7,19 @@ class Player:
     troops = [
         {
             'code': 'S',
-            'count': 4,
+            'count': 0,
             'HP': 10,
             'Damage': 10,
         },
         {
             'code': 'T',
-            'count': 13,
+            'count': 0,
             'HP': 100,
             'Damage': 100,
         },
         {
             'code': 'F',
-            'count': 90,
+            'count': 0,
             'HP': 50,
             'Damage': 250,
         }
@@ -93,6 +93,3 @@ class Player:
     def __init__(self, nickname, money):
         self.nickname = nickname
         self.money = money
-
-    def buildings_status(self, place, building):
-        return 'salam'
