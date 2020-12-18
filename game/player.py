@@ -93,3 +93,4 @@ class Player:
         ]
         self.nickname = nickname
         self.money = money
+        self.successful_attacks = 0

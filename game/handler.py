@@ -1,7 +1,5 @@
-from player import Player
 from building import Building
 from troop import Troop
-from random import *
 
 
 class Handler:

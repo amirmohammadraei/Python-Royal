@@ -2,6 +2,7 @@ from player import Player
 from building import Building
 from handler import Handler
 from troop import Troop
+from attack import Attack
 from random import *
 
 
@@ -60,13 +61,28 @@ if __name__ == '__main__':
     player1 = Player(nickname1, 50000)
     player2 = Player(nickname2, 5000000)
 
+    count = 0
     turn = randint(1, 2)
     print("Player" + str(turn) + " you should start.")
-    if turn == 1:
-        var1 = Handler(player1).menu(1)
-        var2 = Handler(player2).menu(2)
-    elif turn == 2:
-        var2 = Handler(player2).menu(2)
-        var1 = Handler(player1).menu(1)
-    else:
-        print("Something went wrong. Try again.")
+    while count != 3:
+        count += 1
+        if turn == 1:
+            var1 = Handler(player1).menu(1)
+            var2 = Handler(player2).menu(2)
+            result = Attack(player1, player2)
+            if result == 'win':
+                turn = 1
+            else:
+                turn = 2
+
+        elif turn == 2:
+            var2 = Handler(player2).menu(2)
+            var1 = Handler(player1).menu(1)
+            result = Attack(player2, player1)
+            if result == 'win':
+                turn = 2
+            else:
+                turn = 1
+
+        else:
+            print("Something went wrong. Try again.")
