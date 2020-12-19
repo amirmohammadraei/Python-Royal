@@ -1,4 +1,4 @@
-# Python-Royal
+# Python-Royale
 Something like clash royal but much easier and no GUI(aber jetz 😀).
 
 in پروگرس
