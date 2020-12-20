@@ -180,7 +180,6 @@ class Handler:
                             if self.Player.money - fee >= 0:
                                 for w in player_troops:
                                     if w['code'] == i['code']:
-                                        print(w['count'])
                                         w['count'] += tedad
                                 self.Player.money -= fee
                                 print("Troops added to your army.")
@@ -214,6 +213,9 @@ class Handler:
                         retnon += 1
                         print('\n' + '\t' + self.tropp_name(i['code']) + " : " + str(i['count']), end='')
                 print('None.') if retnon == 0 else print()
+                print('\n')
+                print("************ Money ************")
+                self.print_player_money(self.Player.money)
                 print('\n')
 
             elif choice == '4':

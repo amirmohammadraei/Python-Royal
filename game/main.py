@@ -59,7 +59,7 @@ if __name__ == '__main__':
     nickname1 = input("Player1 please enter your nickname: ")
     nickname2 = input("Player2 please enter your nickname: ")
     player1 = Player(nickname1, 50000)
-    player2 = Player(nickname2, 5000000)
+    player2 = Player(nickname2, 50000)
 
     count = 0
     turn = randint(1, 2)
