@@ -69,7 +69,7 @@ if __name__ == '__main__':
         if turn == 1:
             var1 = Handler(player1).menu(1)
             var2 = Handler(player2).menu(2)
-            result = Attack(player1, player2)
+            result = Attack(player1, player2).start()
             if result == 'win':
                 turn = 1
             else:
@@ -78,7 +78,7 @@ if __name__ == '__main__':
         elif turn == 2:
             var2 = Handler(player2).menu(2)
             var1 = Handler(player1).menu(1)
-            result = Attack(player2, player1)
+            result = Attack(player2, player1).start()
             if result == 'win':
                 turn = 2
             else:
