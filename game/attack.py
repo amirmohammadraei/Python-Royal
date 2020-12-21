@@ -24,9 +24,15 @@ class Attack:
             res = building_hp - troops_damage
             return res
 
-    def handle_building_hp(self, player, report):
+    def handle_building_hp(self, player, report, place):
         if report == 0:
             for i in player.buildings:
+                if i['place'] == str(place):
+                    i['hp'] = 0
+        else:
+            for i in player.buildings:
+                if i['place'] == str(place):
+                    i['hp'] -= report
 
 
     def start(self):
@@ -37,7 +43,9 @@ class Attack:
             building_damage = cal[1]
             res = self.check_attack_to(troops_damage, building_damage)
             if res == 0:
-                self.handle_building_hp(self.defender, 0)
+                self.handle_building_hp(self.defender, 0, 0)
+            else:
+                self.handle_building_hp(self.defender, res, 0)
 
         if len(self.defender.map[0][1]) == 3:
             pass
