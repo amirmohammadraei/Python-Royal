@@ -71,6 +71,7 @@ if __name__ == '__main__':
             var2 = Handler(player2).menu(2)
             result = Attack(player1, player2).start()
             if result == 'win':
+                player1.successful_attacks += 1
                 turn = 1
             else:
                 turn = 2
@@ -80,9 +81,21 @@ if __name__ == '__main__':
             var1 = Handler(player1).menu(1)
             result = Attack(player2, player1).start()
             if result == 'win':
+                player2.successful_attacks += 1
                 turn = 2
             else:
                 turn = 1
 
         else:
             print("Something went wrong. Try again.")
+
+    if player1.successful_attacks > player2.successful_attacks:
+        player1.money += player2.money
+        print("Player1 is winner.")
+
+    elif player1.successful_attacks < player2.successful_attacks:
+        player2.money += player1.money
+        print("Player2 is winner.")
+
+    else:
+        print("After a hard match, we have no winner.\n  \t Good luck :) ")

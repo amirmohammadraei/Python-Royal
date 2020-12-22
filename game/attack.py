@@ -1,11 +1,15 @@
 from building import Building
 from troop import Troop
+from player import Player
 
 
 class Attack:
 
     def __init__(self, attacker, defender):
+        self.tmp_attacker = attacker
         self.attacker = attacker
+        self.pas = Player
+        self.pas = attacker
         self.defender = defender
         self.troops = Troop()
         self.buildings = Building()
@@ -35,7 +39,6 @@ class Attack:
                 if i['place'] == str(place):
                     i['hp'] = 0
         else:
-            print(report)
             for i in player.buildings:
                 if i['place'] == str(place):
                     i['hp'] = report
@@ -45,11 +48,11 @@ class Attack:
             if i['building'] == code:
                 main_damage = i['damage']
                 for j in attacker.troops:
-                    if j['code'] == 'B' and j['count'] != 0 and j['HP'] < i['damage']:
+                    if j['code'] == 'T' and j['count'] != 0 and j['HP'] < i['damage']:
                         while i['damage'] > 0 and j['count'] > 0 and i['damage'] >= j['HP']:
                             j['count'] -= 1
                             i['damage'] -= j['HP']
-                    if j['code'] == 'T' and j['count'] != 0 and j['HP'] < i['damage']:
+                    if j['code'] == 'F' and j['count'] != 0 and j['HP'] < i['damage']:
                         while i['damage'] > 0 and j['count'] > 0 and i['damage'] >= j['HP']:
                             j['count'] -= 1
                             i['damage'] -= j['HP']
@@ -71,17 +74,17 @@ class Attack:
 
     def war_report(self, dead_troops, defender_buildings, outcome):
         retnon = 0
-        print("\n\nWar Report :")
+        print("\n\nWar Report : ")
         print("Units Involved: ", end='')
-        for i in self.attacker.troops:
+        for i in self.pas.troops:
             if i['count'] != 0:
                 retnon += 1
                 print('\n' + '\t' + self.tropp_name(i['code']) + " : " + str(i['count']), end='')
         print('None.') if retnon == 0 else print()
 
         dead_count = 0
-        print("Units KIA :", end='')
-        for i in self.attacker.troops:
+        print("Units KIA : ", end='')
+        for i in self.pas.troops:
             for j in dead_troops.troops:
                 if i['code'] == j['code']:
                     if i['count'] > 0:
@@ -270,7 +273,6 @@ class Attack:
             if res == 0:
                 self.handle_building_hp(self.defender, 0, 4)
                 self.war_report(self.attacker, self.defender, 'win')
-                print(attacker.troops)
                 return 'win'
             else:
                 self.handle_building_hp(self.defender, res, 4)
