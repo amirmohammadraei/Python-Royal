@@ -1,15 +1,13 @@
 from building import Building
 from troop import Troop
-from player import Player
+import copy
 
 
 class Attack:
 
     def __init__(self, attacker, defender):
-        self.tmp_attacker = attacker
+        self.tmp_attacker = copy.deepcopy(attacker)
         self.attacker = attacker
-        self.pas = Player
-        self.pas = attacker
         self.defender = defender
         self.troops = Troop()
         self.buildings = Building()
@@ -76,7 +74,7 @@ class Attack:
         retnon = 0
         print("\n\nWar Report : ")
         print("Units Involved: ", end='')
-        for i in self.pas.troops:
+        for i in self.tmp_attacker.troops:
             if i['count'] != 0:
                 retnon += 1
                 print('\n' + '\t' + self.tropp_name(i['code']) + " : " + str(i['count']), end='')
@@ -84,7 +82,7 @@ class Attack:
 
         dead_count = 0
         print("Units KIA : ", end='')
-        for i in self.pas.troops:
+        for i in self.tmp_attacker.troops:
             for j in dead_troops.troops:
                 if i['code'] == j['code']:
                     if i['count'] > 0:
