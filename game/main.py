@@ -15,10 +15,10 @@ def menu(player):
                                    'Choose your option: ', end='')
 
 
-def change_player(turn):
-    if turn == 1:
+def change_player(time):
+    if time == 1:
         return 2
-    elif turn == 2:
+    elif time == 2:
         return 1
 
 

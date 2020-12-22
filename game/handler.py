@@ -52,6 +52,7 @@ class Handler:
             print("You have " + str(player_money) + ' coins.')
 
     def menu(self, turn):
+        global break_point
         buildings = self.Player.buildings
         player_troops = self.Player.troops
         while True:
@@ -161,12 +162,10 @@ class Handler:
                             num += str(int(opt2[count]))
                             count += 1
                         except IndexError:
-                            count = 2
                             break
                         except ValueError:
                             print("Enter valid inputs.")
                             break_point = True
-                            count = 2
                             break
                     try:
                         if break_point is True:

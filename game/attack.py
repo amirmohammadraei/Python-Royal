@@ -6,8 +6,8 @@ import copy
 class Attack:
 
     def __init__(self, attacker, defender):
-        self.tmp_attacker = copy.deepcopy(attacker)
         self.attacker = attacker
+        self.tmp_attacker = copy.deepcopy(self.attacker)
         self.defender = defender
         self.troops = Troop()
         self.buildings = Building()
@@ -90,6 +90,7 @@ class Attack:
                         print('\n' + '\t' + self.tropp_name(i['code']) + " : " + str(i['count'] - j['count']), end='')
         print('None.') if retnon == 0 else print()
 
+        print("Opponent’s Buildings : ")
         empty = 0
         for i in defender_buildings.buildings:
             if i['building'] is not None:
@@ -110,7 +111,6 @@ class Attack:
     def start(self):
         global possible
         possible = False
-        attacker = self.attacker
         if len(self.defender.map[0][0]) == 3:
             code = self.defender.map[0][0][2]
             cal = self.calculate_damage(code)
