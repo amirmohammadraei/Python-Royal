@@ -4,7 +4,8 @@ class Building:
             'name': 'Command Center',
             'code': 'C',
             'HP': 3000,
-            'price': 3000
+            'price': 3000,
+            'Damage': 0
         },
         {
             'name': '106mm Gun',

@@ -89,6 +89,7 @@ class Handler:
                                                 print("You don't have enough money to repair your building.", end=' ')
                                                 self.print_player_money(self.Player.money)
                                             else:
+                                                i['hp'] = i['mhp']
                                                 self.Player.money -= int(res[0])
                                                 print("Repair completed successfully.")
                                                 self.print_player_money(self.Player.money)
