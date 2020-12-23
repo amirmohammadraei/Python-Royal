@@ -56,10 +56,21 @@ if __name__ == '__main__':
     print("Hi everyone!")
     buildings = Building()
     troops = Troop()
-    nickname1 = input("Player1 please enter your nickname: ")
-    nickname2 = input("Player2 please enter your nickname: ")
+    while True:
+        nickname1 = input("Player1 please enter your nickname: ")
+        if len(nickname1) == 0:
+            continue
+        else:
+            break
+    while True:
+        nickname2 = input("Player2 please enter your nickname: ")
+        if len(nickname2) == 0:
+            continue
+        else:
+            break
     player1 = Player(nickname1, 50000)
     player2 = Player(nickname2, 50000)
+    print('\n')
 
     count = 0
     turn = randint(1, 2)

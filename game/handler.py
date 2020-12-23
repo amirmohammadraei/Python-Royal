@@ -219,7 +219,7 @@ class Handler:
                 print('\n')
 
             elif choice == '4':
-                print("Done!")
+                print("Done!\n")
                 break
             else:
                 print("Please enter valid input.")
